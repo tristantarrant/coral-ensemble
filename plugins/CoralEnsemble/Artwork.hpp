@@ -22,6 +22,8 @@
 #include <cmath>
 #include <cstring>
 
+#include "BrandPath.hpp"
+
 namespace ce_art {
 
 constexpr double W = 345.0;
@@ -413,8 +415,11 @@ inline void draw(cairo_t* cr, const State& s, unsigned layers = kLayerAll)
         text(cr, "BASS", SW_X + 26, SW_Y + 3, 7.5, kSoft, kLeft, false,
              "DejaVu Sans Condensed");
 
-        // maker line
-        text(cr, "dataforte", W / 2, 326, 14, kInk, kCenter, false, "DejaVu Serif");
+        // maker line: the "dataforte" wordmark set in Bitcount Grid Double.
+        // The outline is baked into BrandPath.hpp (tools/gen_brand.py) so the
+        // UI and the modgui look the same without the font installed.
+        set(cr, kInk);
+        ce_brand::draw(cr, W / 2, 328.0, 21.0);
 
         // thumb screw under the footswitch
         screw(cr, W / 2, 421, 5.0, true);
