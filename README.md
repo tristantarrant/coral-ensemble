@@ -5,7 +5,7 @@
 </p>
 
 Faust-based emulation of the **BOSS CE-2 Chorus Ensemble** (1979) as an
-LV2 (with a Stom-Pi/MOD modgui), VST3 and CLAP plugin and a standalone
+LV2 (with a modgui), VST3 and CLAP plugin and a standalone
 JACK app, with a scalable GUI that recalls the original pedal. The 1987
 **CE-2B** bass version's component set and its E.LEVEL control are
 included as a model; at MIX maximum the two are identical.
@@ -150,7 +150,7 @@ GUITAR/BASS slide switch. The **dataforte** wordmark is set in
 `plugins/CoralEnsemble/BrandPath.hpp` by `tools/gen_brand.py`, so the UI
 and the modgui render it identically without the font installed.
 
-The Stom-Pi modgui is generated from the same artwork
+The modgui is generated from the same artwork
 (`tools/render_modgui.cpp`): film strips for the knobs (61 frames), the
 switch and LED, plus `icon.html`, `stylesheet.css` and `modgui.ttl`, with
 every control snapped to whole CSS pixels.
