@@ -1,7 +1,7 @@
 # Coral Ensemble
 
 <p align="center">
-  <img src="screenshot.png" alt="Coral Ensemble GUI" width="345">
+  <img src="screenshot.png" alt="Coral Ensemble GUI" width="285">
 </p>
 
 Faust-based emulation of the **BOSS CE-2 Chorus Ensemble** (1979) as an
