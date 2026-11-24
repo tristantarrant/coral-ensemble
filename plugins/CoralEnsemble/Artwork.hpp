@@ -26,7 +26,7 @@
 
 namespace ce_art {
 
-constexpr double W = 345.0;
+constexpr double W = 285.0;
 constexpr double H = 440.0;
 
 // ---- palette ---------------------------------------------------------
@@ -58,11 +58,11 @@ enum { P_RATE, P_DEPTH, P_MIX, P_MODEL, P_BYPASS, P_COUNT };
 // place backgrounds at fractional offsets with sub-pixel blur otherwise.
 // tools/render_modgui.cpp refuses to generate fractional positions.
 constexpr double KNOB_Y = 115.0, KNOB_R = 26.0;
-constexpr double KX[2] = { 80.0, 265.0 };
-constexpr double MIX_X = 118.75, MIX_Y = 268.75, MIX_R = 15.0;
-constexpr double SW_X = 227.5, SW_Y = 268.75;
-constexpr double LED_X = 172.5, LED_Y = 50.0;
-constexpr double FOOT_X = 172.5, FOOT_Y = 375.0;
+constexpr double KX[2] = { 77.5, 207.5 };
+constexpr double MIX_X = 92.5, MIX_Y = 268.75, MIX_R = 15.0;
+constexpr double SW_X = 192.5, SW_Y = 268.75;
+constexpr double LED_X = 142.5, LED_Y = 50.0;
+constexpr double FOOT_X = 142.5, FOOT_Y = 375.0;
 
 constexpr Control kControls[] = {
     { P_RATE,   kKnob,       KX[0],  KNOB_Y, KNOB_R, 0,    0,  0, 10 },
@@ -332,10 +332,10 @@ inline void led(cairo_t* cr, double cx, double cy, bool lit)
 // The model name in flowing italic lettering, like the original's script.
 inline void logo(cairo_t* cr)
 {
-    text(cr, "Coral", W / 2, 212, 52, kInk, kCenter, true,
+    text(cr, "Coral", W / 2, 222, 40, kInk, kCenter, true,
          "DejaVu Serif", 0.0, 0.0, CAIRO_FONT_SLANT_ITALIC);
-    text(cr, "ENSEMBLE", W / 2, 238, 15, kSoft, kCenter, true,
-         "DejaVu Sans", 0.0, 168.0);
+    text(cr, "ENSEMBLE", W / 2, 243, 13, kSoft, kCenter, true,
+         "DejaVu Sans", 0.0, 150.0);
 }
 
 // ---- layers ----------------------------------------------------------

@@ -31,7 +31,7 @@
 
 #define DISTRHO_UI_USE_CAIRO       1
 #define DISTRHO_UI_USER_RESIZABLE  1
-#define DISTRHO_UI_DEFAULT_WIDTH   345
+#define DISTRHO_UI_DEFAULT_WIDTH   285
 #define DISTRHO_UI_DEFAULT_HEIGHT  440
 
 // Parameter order matches PortIndex in src/coralensemble.h (the

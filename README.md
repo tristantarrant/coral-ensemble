@@ -145,7 +145,7 @@ the JSON and running `make presets` -- no C++ changes.
 
 ## GUI
 
-The pedal is drawn with cairo in a fixed design space (345 × 440) and
+The pedal is drawn with cairo in a fixed design space (285 × 440) and
 scaled to the window with the aspect ratio kept, from 0.5× up, HiDPI
 aware. Knobs drag (Shift: fine), respond to the wheel and reset on
 double-click; the switch and the footswitch click. The palette and

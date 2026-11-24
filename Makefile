@@ -115,18 +115,18 @@ test-ui: ttl
 	$(CC) -O2 -o build/ui_test tests/ui_test.c -ldl -lm -lX11 -lXtst
 	xvfb-run -a -s "-screen 0 1400x1400x24" build/ui_test \
 	  $(CURDIR)/$(BUNDLE)/$(PLUG)_ui.so http://dataforte.net/plugins/$(PLUG) \
-	  $(CURDIR)/$(BUNDLE)/ 345x440 portmap:lv2_enabled=6 \
-	  size:345x440 shot:$(UI_SHOTS)/default.png \
+	  $(CURDIR)/$(BUNDLE)/ 285x440 portmap:lv2_enabled=6 \
+	  size:285x440 shot:$(UI_SHOTS)/default.png \
 	  set:2=5 set:3=5 set:4=10 set:5=0 set:6=0 shot:$(UI_SHOTS)/host-values.png \
-	  drag:80,115,-50 expect:2\>7 \
-	  wheel:265,115,5 expect:3=6 \
-	  drag:265,115,60 expect:3\<7 dclick:265,115 expect:3=5 \
-	  click:227.5,268.75 expect:5=1 \
-	  click:172.5,375 expect:6=1 \
-	  resize:690x880 size:690x880 shot:$(UI_SHOTS)/690x880.png \
-	  drag:118.75,268.75,40 expect:4\<10 \
+	  drag:77.5,115,-50 expect:2\>7 \
+	  wheel:207.5,115,5 expect:3=6 \
+	  drag:207.5,115,60 expect:3\<7 dclick:207.5,115 expect:3=5 \
+	  click:192.5,268.75 expect:5=1 \
+	  click:142.5,375 expect:6=1 \
+	  resize:570x880 size:570x880 shot:$(UI_SHOTS)/570x880.png \
+	  drag:92.5,268.75,40 expect:4\<10 \
 	  resize:500x300 shot:$(UI_SHOTS)/500x300-letterbox.png \
-	  click:172.5,375 expect:6=0
+	  click:142.5,375 expect:6=0
 
 # CLAP: load through the factory, activate, process, list parameters
 test-clap: ttl
