@@ -136,6 +136,13 @@ Modelling notes and deliberate deviations:
 No artist or song is credited with settings that its source does not
 state; the Smiths preset is the recreation's numbers, not the artist's.
 
+The preset list is data: `presets/coralensemble.json` is the source of
+truth (names, values, source metadata). `make presets` regenerates the
+checked-in `plugins/CoralEnsemble/Presets.hpp`; the DPF wrapper exposes
+those entries as programs, which DPF exports to LV2 `manifest.ttl`/
+`presets.ttl` and to VST3/CLAP. Adding or editing a preset means editing
+the JSON and running `make presets` -- no C++ changes.
+
 ## GUI
 
 The pedal is drawn with cairo in a fixed design space (345 × 440) and

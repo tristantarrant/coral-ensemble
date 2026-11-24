@@ -16,6 +16,7 @@
 #   make dsp           regenerate src/coralensemble.cc from the .dsp
 #   make tf            regenerate src/coralensemble_tf.lib (needs sympy)
 #   make brand         regenerate plugins/CoralEnsemble/BrandPath.hpp (needs fontTools)
+#   make presets       regenerate plugins/CoralEnsemble/Presets.hpp from presets/*.json
 #   make screenshot    re-render screenshot.png (README image) from the artwork
 #   make modgui        re-render the modgui images from the artwork
 #   make clean
@@ -37,7 +38,7 @@ DSP2CC  ?= /home/tst/Fun/guitarix/trunk/tools/dsp2cc
 
 TTL_GEN := dpf/utils/lv2_ttl_generator
 
-.PHONY: screenshot all plugin ttl dsp tf brand modgui install install-all test test-clap test-ui test-modgui test-all clean distclean
+.PHONY: screenshot all plugin ttl dsp tf brand presets modgui install install-all test test-clap test-ui test-modgui test-all clean distclean
 
 all: ttl
 
@@ -70,6 +71,9 @@ tf:
 
 brand:
 	python3 tools/gen_brand.py
+
+presets:
+	python3 tools/gen_presets.py presets/coralensemble.json plugins/CoralEnsemble/Presets.hpp
 
 build/render_modgui: tools/render_modgui.cpp plugins/CoralEnsemble/Artwork.hpp
 	mkdir -p build

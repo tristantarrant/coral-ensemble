@@ -18,26 +18,16 @@
 #include "../../src/coralensemble.h"
 #include "../../src/coralensemble.cc"
 
+// Preset table and parameter defaults, generated from presets/coralensemble.json
+#include "Presets.hpp"
+
 START_NAMESPACE_DISTRHO
 
 // --------------------------------------------------------------------
-// Presets: documented CE-2 settings (see README). Program 0 equals the
-// parameter defaults.
-
-struct CeProgram {
-    const char* name;
-    float rate, depth, mix;
-    float model;      // 0 = CE-2 (guitar), 1 = CE-2B (bass)
-};
-
-static const CeProgram kPrograms[] = {
-    { "CE-2 noon - classic 80s clean chorus",                       5.0f, 5.0f, 10.0f, 0.0f },
-    { "Smiths clean shimmer (Marr-style, rate 10-11, depth 1-2)",   3.5f, 6.5f, 10.0f, 0.0f },
-    { "TSOL / SoCal death rock (rate 9 o'clock, depth near noon)",  2.0f, 4.8f, 10.0f, 0.0f },
-    { "Max warp, both knobs full (gentle warbling vibrato)",       10.0f,10.0f, 10.0f, 0.0f },
-    { "Bass: low end preserved (CE-2B)",                            3.0f, 5.0f,  6.5f, 1.0f },
-};
-static constexpr uint32_t kProgramCount = sizeof(kPrograms) / sizeof(kPrograms[0]);
+// Presets come from presets/coralensemble.json via Presets.hpp (make presets).
+// DPF exports them to LV2 manifest/presets.ttl and to VST3/CLAP.
+static_assert(preset_data::kParamCount == static_cast<unsigned>(kParamBypass),
+              "presets/coralensemble.json parameter list does not match DistrhoPluginInfo.h");
 
 // --------------------------------------------------------------------
 
@@ -45,13 +35,12 @@ class PluginCoralEnsemble : public Plugin
 {
 public:
     PluginCoralEnsemble()
-        : Plugin(kParamCount, kProgramCount, 0),
+        : Plugin(kParamCount, preset_data::kCount, 0),
           fDsp(coralensemble::plugin())
     {
         for (uint32_t i = 0; i < kParamBypass; ++i)
-            fParams[i] = 0.0f;
+            fParams[i] = preset_data::kDefaults.value[i];
         fParams[kParamBypass] = 0.0f;
-        setProgramValues(0);
 
         for (uint32_t i = 0; i < kParamBypass; ++i)
             fDsp->connect_ports(i, &fParams[i], fDsp);
@@ -105,21 +94,21 @@ protected:
         {
         case kParamRate:
             p.name = "RATE"; p.symbol = "rate";
-            p.ranges.def = kPrograms[0].rate;
+            p.ranges.def = preset_data::kDefaults.value[kParamRate];
             break;
         case kParamDepth:
             p.name = "DEPTH"; p.symbol = "depth";
-            p.ranges.def = kPrograms[0].depth;
+            p.ranges.def = preset_data::kDefaults.value[kParamDepth];
             break;
         case kParamMix:
             p.name = "MIX"; p.symbol = "mix";
-            p.ranges.def = kPrograms[0].mix;
+            p.ranges.def = preset_data::kDefaults.value[kParamMix];
             break;
         case kParamModel:
             p.hints |= kParameterIsInteger;
             p.name = "MODEL"; p.symbol = "model";
             p.ranges.max = 1.0f;
-            p.ranges.def = 0.0f;
+            p.ranges.def = preset_data::kDefaults.value[kParamModel];
             setEnum(p, { "Guitar", "Bass" });
             break;
         case kParamBypass:
@@ -130,14 +119,16 @@ protected:
 
     void initProgramName(const uint32_t index, String& name) override
     {
-        if (index < kProgramCount)
-            name = kPrograms[index].name;
+        if (index < preset_data::kCount)
+            name = preset_data::kEntries[index].name;
     }
 
     void loadProgram(const uint32_t index) override
     {
-        if (index < kProgramCount)
-            setProgramValues(index);
+        if (index >= preset_data::kCount)
+            return;
+        for (uint32_t i = 0; i < kParamBypass; ++i)
+            fParams[i] = preset_data::kEntries[index].value[i];
     }
 
     float getParameterValue(const uint32_t index) const override
@@ -216,14 +207,6 @@ private:
     std::vector<float> fDry;
     float fWet = 1.0f;
     float fFadeStep = 0.002f;
-
-    void setProgramValues(const uint32_t index)
-    {
-        fParams[kParamRate]  = kPrograms[index].rate;
-        fParams[kParamDepth] = kPrograms[index].depth;
-        fParams[kParamMix]   = kPrograms[index].mix;
-        fParams[kParamModel] = kPrograms[index].model;
-    }
 
     static void setEnum(Parameter& p, std::initializer_list<const char*> labels)
     {

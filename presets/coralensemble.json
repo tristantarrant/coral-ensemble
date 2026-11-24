@@ -1,0 +1,45 @@
+{
+  "$comment": "Source of truth for the Coral Ensemble presets. Edit this file and run 'make presets' to regenerate plugins/CoralEnsemble/Presets.hpp (DPF programs, exported to LV2 presets.ttl/manifest.ttl and to VST3/CLAP). The parameter order below must match the Parameters enum in DistrhoPluginInfo.h (rate, depth, mix, model); program 0 must equal 'defaults'.",
+  "parameters": ["rate", "depth", "mix", "model"],
+  "integers": ["model"],
+  "ranges": {
+    "rate":  [0.0, 10.0],
+    "depth": [0.0, 10.0],
+    "mix":   [0.0, 10.0],
+    "model": [0.0, 1.0]
+  },
+  "defaults": {
+    "rate": 5.0,
+    "depth": 5.0,
+    "mix": 10.0,
+    "model": 0.0
+  },
+  "presets": [
+    {
+      "name": "CE-2 noon - classic 80s clean chorus",
+      "values": { "rate": 5.0, "depth": 5.0, "mix": 10.0, "model": 0.0 },
+      "source": "plugin default (the classic setting)"
+    },
+    {
+      "name": "Smiths clean shimmer (Marr-style, rate 10-11, depth 1-2)",
+      "values": { "rate": 3.5, "depth": 6.5, "mix": 10.0, "model": 0.0 },
+      "artist": "The Smiths (fan recreation)",
+      "source": "fan recreations of the Smiths chorus: rate 10-11 o'clock, depth 1-2 o'clock (guitargangsters; community). A recreation, not Johnny Marr's published settings"
+    },
+    {
+      "name": "TSOL / SoCal death rock (rate 9 o'clock, depth near noon)",
+      "values": { "rate": 2.0, "depth": 4.8, "mix": 10.0, "model": 0.0 },
+      "source": "BOSS article: rate set to a crawl at 9 o'clock and the depth just shy of noon"
+    },
+    {
+      "name": "Max warp, both knobs full (gentle warbling vibrato)",
+      "values": { "rate": 10.0, "depth": 10.0, "mix": 10.0, "model": 0.0 },
+      "source": "Guitar World: even with the rate and depth knobs fully maxed, it produces a gently warbling vibrato"
+    },
+    {
+      "name": "Bass: low end preserved (CE-2B)",
+      "values": { "rate": 3.0, "depth": 5.0, "mix": 6.5, "model": 1.0 },
+      "source": "illustrative CE-2B setting; Aion describes its mix control as especially useful for bass guitar so the low-end is preserved"
+    }
+  ]
+}
