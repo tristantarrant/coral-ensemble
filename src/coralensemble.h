@@ -3,7 +3,6 @@
 #ifndef CE_CORALENSEMBLE_H
 #define CE_CORALENSEMBLE_H
 
-#include <lv2.h>
 
 #define CEPLUGIN_URI "http://dataforte.net/plugins/coralensemble"
 
