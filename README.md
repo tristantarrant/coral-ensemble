@@ -165,6 +165,8 @@ every control snapped to whole CSS pixels.
 The Linux UI is `ui:X11UI`; on Wayland it runs through XWayland (LV2 has
 no Wayland UI type).
 
+House rule: **pedal-face UIs use cairo** (CPU raster, no OpenGL), so the desktop UI, the modgui and the screenshots come from the same drawing code.
+
 ## Building
 
 ```sh
